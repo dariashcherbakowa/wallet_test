@@ -18,8 +18,6 @@ import 'package:wallet_test/features/transfers/transfer_status_sync_service.dart
 final GetIt sl = GetIt.instance;
 
 void registerAppDependencies() {
-  sl.allowFactoryRetrieval = true;
-
   if (!sl.isRegistered<IAuthRepository>()) {
     sl.registerLazySingleton<IAuthRepository>(
       () => DevAuthRepository(),
@@ -66,7 +64,7 @@ void registerAppDependencies() {
   }
 
   if (!sl.isRegistered<AddressTileBloc>()) {
-    sl.registerFactory<AddressTileBloc>(
+    sl.registerLazySingleton<AddressTileBloc>(
       () => AddressTileBloc(
         repository: sl<IAddressRepository>(),
       ),
